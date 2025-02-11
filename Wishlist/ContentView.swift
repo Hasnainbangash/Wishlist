@@ -13,6 +13,7 @@ struct ContentView: View {
     @Query private var wishes: [Wish]
     
     @State private var isAlertShowing: Bool = false
+    @State private var title: String = ""
     
     var body: some View {
         NavigationStack {
@@ -35,7 +36,12 @@ struct ContentView: View {
                 }
             }
             .alert("Create a new one", isPresented: $isAlertShowing) {
-                
+                TextField("Enter a wish", text: $title)
+                Button {
+                    
+                } label: {
+                    Text("Save")
+                }
             }
             .overlay {
                 if wishes.isEmpty {
