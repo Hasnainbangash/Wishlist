@@ -38,7 +38,8 @@ struct ContentView: View {
             .alert("Create a new one", isPresented: $isAlertShowing) {
                 TextField("Enter a wish", text: $title)
                 Button {
-                    
+                    modelContext.insert(Wish(title: title))
+                    title = ""
                 } label: {
                     Text("Save")
                 }
