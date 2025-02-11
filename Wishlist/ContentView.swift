@@ -13,16 +13,18 @@ struct ContentView: View {
     @Query private var wishes: [Wish]
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach(wishes) { wish in
+                    Text(wish.title)
+                }
+            } //: LIST
+            .navigationTitle("Wishlist")
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: Wish.self, inMemory: true) // Without this there will be no model context in the environment. Another important thing about this code becuase it is a preview code we are going to create an in-memory container so that any preview objects we made won't be saved. Instead they will be just temporary.
 }
