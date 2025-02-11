@@ -39,6 +39,12 @@ struct ContentView: View {
                             .imageScale(.large)
                     }
                 }
+                
+                if wishes.isEmpty != true {
+                    ToolbarItem(placement: .bottomBar) {
+                        Text("\(wishes.count)")
+                    }
+                }
             }
             .alert("Create a new one", isPresented: $isAlertShowing) {
                 TextField("Enter a wish", text: $title)
@@ -62,7 +68,7 @@ struct ContentView: View {
     let container = try! ModelContainer(for: Wish.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
     container.mainContext.insert(Wish(title: "Master SwiftData"))
-    container.mainContext.insert(Wish(title: "But a new iphone"))
+    container.mainContext.insert(Wish(title: "Buy a new iphone"))
     container.mainContext.insert(Wish(title: "Practice latin dances"))
     container.mainContext.insert(Wish(title: "Travel to Europe"))
     container.mainContext.insert(Wish(title: "Make a positive impact"))
