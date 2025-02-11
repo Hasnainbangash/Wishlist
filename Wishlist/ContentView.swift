@@ -12,6 +12,8 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var wishes: [Wish]
     
+    @State private var isAlertShowing: Bool = false
+    
     var body: some View {
         NavigationStack {
             List {
@@ -25,13 +27,15 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        
+                        isAlertShowing.toggle()
                     } label: {
                         Image(systemName: "plus")
                             .imageScale(.large)
                     }
-
                 }
+            }
+            .alert("Create a new one", isPresented: $isAlertShowing) {
+                
             }
             .overlay {
                 if wishes.isEmpty {
