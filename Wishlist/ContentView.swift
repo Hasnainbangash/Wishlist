@@ -17,6 +17,8 @@ struct ContentView: View {
             List {
                 ForEach(wishes) { wish in
                     Text(wish.title)
+                        .font(.title.weight(.light))
+                        .padding(.vertical, 2)
                 }
             } //: LIST
             .navigationTitle("Wishlist")
@@ -29,7 +31,20 @@ struct ContentView: View {
     }
 }
 
-#Preview {
+#Preview("List with Sample Data") {
+    let container = try! ModelContainer(for: Wish.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    
+    container.mainContext.insert(Wish(title: "Master SwiftData"))
+    container.mainContext.insert(Wish(title: "But a new iphone"))
+    container.mainContext.insert(Wish(title: "Practice latin dances"))
+    container.mainContext.insert(Wish(title: "Travel to Europe"))
+    container.mainContext.insert(Wish(title: "Make a positive impact"))
+    
+    return ContentView()
+        .modelContainer(container)
+}
+
+#Preview("Empty List") {
     ContentView()
         .modelContainer(for: Wish.self, inMemory: true) // Without this there will be no model context in the environment. Another important thing about this code becuase it is a preview code we are going to create an in-memory container so that any preview objects we made won't be saved. Instead they will be just temporary.
 }
