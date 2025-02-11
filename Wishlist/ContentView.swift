@@ -42,7 +42,7 @@ struct ContentView: View {
                 
                 if wishes.isEmpty != true {
                     ToolbarItem(placement: .bottomBar) {
-                        Text("\(wishes.count)")
+                        Text("\(wishes.count) wish\(wishes.count > 1 ? "es" : "")")
                     }
                 }
             }
